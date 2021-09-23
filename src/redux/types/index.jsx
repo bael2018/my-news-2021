@@ -1,0 +1,2 @@
+export const ACTIVE_TYPE = 'ACTIVE_TYPE'
+export const LOADING_TYPE = 'LOADING_TYPE'

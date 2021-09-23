@@ -1,0 +1,41 @@
+
+.logo{
+    cursor: pointer;
+    width: 70px;
+    height: 45px;
+    position: relative;
+}
+
+.logo span{
+    transform: translateY(-7px);
+}
+
+.logo:active span{
+    transform: translateY(0);
+}
+
+.logo::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #01cbe6;
+    position: absolute;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.logo span{
+    width: 100%;
+    background: #00e1ff;
+    height: 100%;
+    display: flex;
+    position: relative;
+    font-weight: 600;
+    justify-content: center;
+    font-size: 16px;
+    transition: .2s;
+    align-items: center;
+    color: white;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
