@@ -174,15 +174,21 @@ const Single = () => {
                                     {item.likes}
                                 </span> 
 
-                                <button className={
-                                    select.map(({id}) => {
-                                        return `
-                                            ${id === newID ? cls.activeSelect : null}
-                                        `
-                                    })
-                                } onClick={() => handleRead(item , newID)}>
-                                    Read Later
-                                </button>
+                                {
+                                    user ? (
+                                        <button className={
+                                            select.map(({id}) => {
+                                                return `
+                                                    ${id === newID ? cls.activeSelect : null}
+                                                `
+                                            })
+                                        } onClick={() => handleRead(item , newID)}>
+                                            Read Later
+                                        </button>
+                                    ) : (
+                                        null
+                                    )
+                                }
                             </div>
                             <div className={cls.new_child_comment}>
                                 {

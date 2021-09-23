@@ -17,8 +17,12 @@ const Selected = () => {
         .then(res => res.json() , setLoading(true))
         .then(r => {
             setLoading(false)
-            const data = arrayFunc(r)
-            setBase(data)
+            if(r){
+                const data = arrayFunc(r)
+                setBase(data)
+            }else(
+                setBase([])
+            )
         })
     } , [show])
 
@@ -32,7 +36,7 @@ const Selected = () => {
             {
                 loading ? <Loader/> : (
                     base.length === 0 ? (
-                        <div>
+                        <div className={cls.seleted_empty}>
                             <h1>You have no selected news</h1>
                         </div>
                     ) : (
