@@ -4,11 +4,13 @@ import { FcGoogle } from 'react-icons/fc'
 import {authRequest} from '../helpers'
 import { useHistory } from 'react-router'
 import SignIn from '../components/SignIn'
+import InputValid from '../components/InputValid'
 
 const API_KEY = 'AIzaSyAdxuhd3YQo9M2b6H6r2RlpmBFASgjEw-g'
 const BASE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
 
 const Auth = () => {
+    const [inputState , setInputState] = useState(false)
     const [change , setChange] = useState(false)
     const [password , setPassword] = useState('')
     const [email , setEmail] = useState('')
@@ -46,17 +48,18 @@ const Auth = () => {
                     })
                 })
                 .then(() => {
-                    setUserName('')
-                    setPassword('')
-                    setPicture('')
-                    setEmail('')
                     history.push('/')
                     window.location.reload()
+                    setInputState(false)
                 })
             })
         }else{
-            alert('Fill the inputs')
+            setInputState(true)
         }
+        setUserName('')
+        setPassword('')
+        setPicture('')
+        setEmail('')
     }   
 
     return (
@@ -75,6 +78,10 @@ const Auth = () => {
                         placeholder='Your picture' 
                         type="text" 
                     />
+                    <InputValid
+                        state={inputState}
+                        value={'Enter your picture'}
+                    />
                     <input 
                         style={{
                             background: userName ? '#01cbe6' : null , 
@@ -84,6 +91,10 @@ const Auth = () => {
                         type="text" 
                         value={userName}
                         onChange={e => setUserName(e.target.value)}
+                    />
+                     <InputValid
+                        state={inputState}
+                        value={'Enter your name'}
                     />
                     <input 
                         style={{
@@ -95,6 +106,10 @@ const Auth = () => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
+                     <InputValid
+                        state={inputState}
+                        value={'Email address is required'}
+                    />
                     <input 
                         style={{
                             background: password ? '#01cbe6' : null , 
@@ -104,6 +119,10 @@ const Auth = () => {
                         type="password" 
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                    />
+                     <InputValid
+                        state={inputState}
+                        value={'Password is required'}
                     />
                     <button onClick={handleForm} type='submit'>CREATE</button>
                 </form>

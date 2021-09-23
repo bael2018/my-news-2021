@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import { authRequest } from '../../helpers'
+import { arrayFunc, authRequest } from '../../helpers'
 import cls from './SignIn.module.css'
 import { FcGoogle } from 'react-icons/fc'
+import InputValid from '../InputValid'
+import { getRequest } from '../../api/index'
 
 const API_KEY = 'AIzaSyAdxuhd3YQo9M2b6H6r2RlpmBFASgjEw-g'
 const BASE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
@@ -12,22 +14,42 @@ const SignIn = ({setChange}) => {
     const [email , setEmail] = useState('')
     const history = useHistory()
 
+    const [val , setVal] = useState(false)
+    const [inputState , setInputState] = useState(false)
+
     const handleForm = e => {
         e.preventDefault()
 
         if(password !== '' && email !== ''){
             authRequest(BASE_URL , email , password)
             .then(r => {
-                console.log(r);
-                localStorage.setItem('user' , JSON.stringify(r.localId))
-                setPassword('')
-                setEmail('')
-                history.push('/')
-                window.location.reload()
+                if(r.localId){
+                    getRequest('users.json' , '' , '')
+                    .then(result => result.json())
+                    .then(el => {
+                        const usersData = arrayFunc(el)
+                        usersData.forEach(item => {
+                            if(item.id === r.localId){
+                                localStorage.setItem('user' , JSON.stringify(r.localId))
+                                setVal(true)
+                                setInputState(false)
+                                history.push('/')
+                                window.location.reload()
+                                
+                            }
+                        })
+                    })
+                }else{
+                    setVal(false)
+                    setInputState(true)
+                }
             })
         }else{
-            alert('Fill the inputs')
+            setVal(true)
+            setInputState(true)
         }
+        setPassword('')
+        setEmail('')
     }   
 
     return (
@@ -51,6 +73,12 @@ const SignIn = ({setChange}) => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
+                <InputValid
+                    state={inputState}
+                    value={
+                    val ? 
+                    'Email address is required' : 'Wrong email address'
+                }/>
                 <input 
                     style={{
                         background: password ? '#01cbe6' : null , 
@@ -61,6 +89,12 @@ const SignIn = ({setChange}) => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
+                 <InputValid
+                    state={inputState}
+                    value={
+                    val ? 
+                    'Password is required' : 'Wrong password'
+                }/>
                 <button onClick={handleForm} type='submit'>CREATE</button>
             </form>
             <div className={cls.auth_alternate}>
