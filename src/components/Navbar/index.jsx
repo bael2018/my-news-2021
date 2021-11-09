@@ -1,24 +1,20 @@
 import cls from './Navbar.module.css'
 import Logo from '../UI/Logo'
-import {AiOutlineBars} from 'react-icons/ai'
-import Sidebar from '../Sidebar'
-import { useDispatch } from 'react-redux'
-import { MdClose } from 'react-icons/md'
 import { useEffect, useState } from 'react'
-import { sidebarAction } from '../../redux/actions'
 import { NavLink } from 'react-router-dom'
 import { RiSearch2Line } from 'react-icons/ri'
 import {FaUserCircle} from 'react-icons/fa'
 import { getRequest } from '../../api'
+import { GrClose } from 'react-icons/gr'
 import { arrayFunc } from '../../helpers'
+import { AiOutlineBars } from 'react-icons/ai'
 
 const Navbar = () => {
     const user = JSON.parse(localStorage.getItem('user'))
     const [scroll , setScroll] = useState(false)
+    const [bar , setBar] = useState(false)
     const [cat , setCat] = useState([])
-    const [btn , setBtn] = useState(true)
     const [image , setImage] = useState('')
-    const dispatch = useDispatch()
 
     useEffect(() => {
         if(user){
@@ -29,11 +25,6 @@ const Navbar = () => {
             })
         }
     }, [user])
-
-    const handleBurger = () => {
-        setBtn(!btn)
-        dispatch(sidebarAction())
-    }
 
     useEffect(() => {
         getRequest('categories.json' , '' , '')
@@ -54,24 +45,44 @@ const Navbar = () => {
     }
 
     return (
-        <section 
+        <>
+            <div 
+                className={bar ? cls.leftBar_cover : `${cls.leftBar_cover} ${cls.leftBar_cover_active}`}
+                onClick={() => setBar(false)}
+            ></div>
+            <div className={bar ? cls.leftBar : `${cls.leftBar} ${cls.leftBar_active}`}>
+                <div className={cls.leftBar_inside}>
+                    <span className={cls.leftBar_icon} onClick={() => setBar(prev => !prev)}>
+                        <GrClose/>
+                    </span>
+                    <NavLink style={{textDecoration: 'none'}} exact to='/'><Logo/></NavLink> 
+                </div>
+                <div className={cls.leftBar_link}>
+                    {
+                        cat.map(({ title , id }) => {
+                            return <NavLink 
+                                key={id} 
+                                activeClassName={cls.activeLink} 
+                                exact to={`/${title}`}
+                            > {title}
+                            </NavLink>
+                        })
+                    }
+                </div>
+            </div>
+           <section 
             className={cls.navbar}
             style={{boxShadow: scroll ? '0px 0px 3px 3px #dadada' : null}}
-        >
+            >
             <div className={cls.navbar_left}>
-                {
-                    btn ? (
-                        <AiOutlineBars onClick={handleBurger} className={cls.sidebar_btn}/>
-                    ) : (
-                        <MdClose onClick={handleBurger} className={cls.sidebar_btn}/>
-                    )
-                }
-                <Sidebar/>
-                <NavLink style={{textDecoration: 'none'}} exact to='/'><Logo/></NavLink>
+                <div className={cls.navbar_btn} onClick={() => setBar(prev => !prev)}>
+                    <AiOutlineBars/>
+                </div>
+                <NavLink className={cls.logo_clear} style={{textDecoration: 'none'}} exact to='/'><Logo/></NavLink>
             </div>
             <div className={cls.navbar_middle}>
                 {
-                    cat.map(({title , id}) => {
+                    cat.map(({ title , id }) => {
                         return <NavLink 
                             key={id} 
                             activeClassName={cls.activeLink} 
@@ -85,12 +96,13 @@ const Navbar = () => {
                 <NavLink exact to='/search'><RiSearch2Line/></NavLink>
                 <NavLink exact to={user ? '/user' : '/auth'}>
                     {
-                        user ? <img src={`${image}`} alt="userPicture" />
+                        user ? <img src={`${image}`} alt="user" />
                         : <FaUserCircle/>
                     }
                 </NavLink>
             </div>
         </section>
+        </>
     )
 }
 

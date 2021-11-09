@@ -28,24 +28,24 @@ const Search = () => {
                 case 'title':
                     const filteredTitle = data
                     .filter(({title}) => title
-                    .toLowerCase().
-                    includes(value.toLowerCase()))
+                    .toLowerCase()
+                    .includes(value.toLowerCase()))
                     setSearchData(filteredTitle)
                     setValue('')
                     break
                 case 'category':
                     const filteredCategory = data
                     .filter(({category}) => category
-                    .toLowerCase().
-                    includes(value.toLowerCase()))
+                    .toLowerCase()
+                    .includes(value.toLowerCase()))
                     setSearchData(filteredCategory)
                     setValue('')
                     break
                 case 'subcategory':
                     const filteredSubcategory = data
                     .filter(({subcategory}) => subcategory
-                    .toLowerCase().
-                    includes(value.toLowerCase()))
+                    .toLowerCase()
+                    .includes(value.toLowerCase()))
                     setSearchData(filteredSubcategory)
                     setValue('')
                     break
@@ -63,7 +63,7 @@ const Search = () => {
                         <input 
                             value={value} 
                             onChange={e => setValue(e.target.value)} 
-                            placeholder='search' type="text" 
+                            placeholder={`Search by ${deps}`} type="text" 
                         />
                         <button onClick={handleSearch}><RiSearch2Line/></button>
                     </span>
@@ -90,7 +90,7 @@ const Search = () => {
                                      {
                                          searchData.length === 0 ? (
                                              <div className={cls.isEmpty}>
-                                                 <h1>Something went wrong!</h1>
+                                                 <h1>Nothing has been found!</h1>
                                              </div>
                                          ) : (
                                              searchData.map(({id , title , picture , content , subcategory}) => {

@@ -56,3 +56,14 @@
 .sticky_header_body_inner_link p{
     color: #01cbe6 !important;
 }
+
+@media screen and (max-width: 1000px){
+    
+    .sticky{
+        width: 100%;
+        height: 650px;
+        position: relative;
+        padding: 0 10px;
+        border: none;
+    }
+}

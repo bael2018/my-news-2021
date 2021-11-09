@@ -14,7 +14,8 @@ const SubNews = () => {
     const [change , setChange] = useState('General')
     const [show , setShow] = useState(false)
     const [news , setNews] = useState([])
-    const {id} = useParams()
+    const [view , setView] = useState(false)
+    const { id } = useParams()
 
     useEffect(() => {
         setChange('General')
@@ -47,28 +48,46 @@ const SubNews = () => {
         <section className={cls.root}>
             <div className={cls.root_header}>
                 <h2>{id}</h2>
-                <span onClick={() => setShow(!show)}>
-                    <h3>{change}</h3>
-                    <div    
-                        style={{
-                            height: show ? '100px' : '0',
-                            bottom: show ? '-290%' : '0'
-                        }}
-                    >
-                        <p onClick={() => setChange('General')}>General</p>
-                        {
-                            subCategory.map(({id , title}) => {
-                                return <p 
-                                    onClick={() => setChange(title)} 
-                                    key={id}>{title}
-                                </p>
-                            })
-                        }
-                    </div>
-                </span>
+
+                <div className={cls.root_header_inside}>
+                    <div className={cls.root_header_inside_inner}>
+                        <div 
+                            onClick={() => setView(false)}
+                            className={view ? cls.linear_child : `${cls.linear_child} ${cls.linear_child_active}`}
+                        >
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div 
+                            onClick={() => setView(true)}
+                            className={view ? `${cls.vertical_child} ${cls.vertical_child_active}` : cls.vertical_child}
+                        >
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>  
+                    <span className={cls.drop} onClick={() => setShow(!show)}>
+                        <h3>{change}</h3>
+                        <div    
+                            style={{
+                                height: show ? '100px' : '0',
+                                bottom: show ? '-290%' : '0'
+                            }}
+                        >
+                            <p onClick={() => setChange('General')}>General</p>
+                            {
+                                subCategory.map(({id , title}) => {
+                                    return <p 
+                                        onClick={() => setChange(title)} 
+                                        key={id}>{title}
+                                    </p>
+                                })
+                            }
+                        </div>
+                    </span>
+                </div>
             </div>
 
-            <div className={cls.root_body}>
+            <div className={view ? `${cls.root_body} ${cls.root_body_active}` : cls.root_body}>
                 {
                     loading ? <Loader/> : (
                         news.length === 0 ? <Empty/> : (
@@ -83,8 +102,8 @@ const SubNews = () => {
                                         <span>
                                             <CgCalendarDates/> 
                                             {year}-
-                                            {month >= 10 ? month + 1 : `0${month + 1}`}-
-                                            {days >= 10 ? days : `0${days}`}
+                                            {month >= 9 ? month + 1 : `0${month + 1}`}-
+                                            {days >= 9 ? days : `0${days}`}
                                         </span>
                                         <p>{content}</p>
                                     </div>

@@ -30,6 +30,15 @@
     width: 20%;
 }
 
+.navbar_btn{
+    display: none;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 35px;
+    color: #01cbe6;
+}
+
 .navbar_middle{
     display: flex;
     justify-content: space-between;
@@ -53,6 +62,10 @@
     bottom: -6px;
     transition: .2s;
     background: #01cbe6;
+}
+
+.navbar_middle a:hover{
+    color: #01cbe6;
 }
 
 .activeLink::before{
@@ -85,4 +98,177 @@
     border-radius: 50%;
     object-fit: cover;
     height: 30px;
+}
+
+.leftBar{
+    display: none;
+}
+
+@media screen and (max-width: 1150px){
+    
+    .navbar_right,
+    .navbar_left{
+        width: 15%;
+    }
+
+    .navbar_middle{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 850px){
+
+    .logo_clear{
+        display: none;
+    }
+    
+    .navbar_middle{
+        display: none !important;  
+    }
+
+    .navbar_right,
+    .navbar_left{
+        width: 50%;
+    }
+
+    .leftBar{
+        display: flex;
+        width: 40%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: white;
+        flex-direction: column;
+        z-index: 25;
+        box-sizing: border-box;
+        padding: 25px 30px;
+        box-shadow: 0px 0px 3px 3px rgb(206, 206, 206);
+        position: fixed;
+        transition: .3s;
+    }
+
+    .navbar_btn{
+        display: block;
+    }
+
+    .leftBar_active{
+        left: -41%;
+    }
+
+    .leftBar_cover{
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: .3s;
+        height: 100%;
+        opacity: 1;
+        pointer-events: all;
+        z-index: 20;
+        background: rgba(0, 0, 0, 0.3);
+        position: fixed;
+    }
+
+    .leftBar_cover_active{
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .leftBar_inside{
+        display: flex;
+        align-items: center;
+    }
+
+    .leftBar_icon{
+        color: #01cbe6 !important;
+        font-size: 27px;
+        margin-right: 35px;
+    }
+
+    .leftBar_link{
+        margin-left: 65px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 25px;
+    }
+
+    .leftBar_link a{
+        text-decoration: none;
+        margin-bottom: 20px;
+        color: black;
+        font-size: 18px;
+    }
+
+    .activeLink{
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 750px){
+
+    .leftBar{
+        width: 45%;
+    }
+
+    .leftBar_active{
+        left: -46%;
+    }
+
+    .leftBar_link a{
+        text-decoration: none;
+        margin-bottom: 20px;
+        color: black;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    .leftBar{
+        width: 50%;
+    }
+
+    .leftBar_active{
+        left: -51%;
+    }
+}
+
+@media screen and (max-width: 550px){
+
+    .leftBar{
+        width: 60%;
+    }
+
+    .leftBar_active{
+        left: -61%;
+    }
+}
+
+@media screen and (max-width: 500px){
+
+    .leftBar{
+        width: 70%;
+    }
+
+    .leftBar_active{
+        left: -71%;
+    }
+}
+
+@media screen and (max-width: 500px){
+
+    .leftBar{
+        width: 90%;
+    }
+
+    .leftBar_active{
+        left: -91%;
+    }
+
+    .navbar_right a:nth-child(1){
+        margin-right: 15px;
+    }
+
+    .navbar_right a{
+        margin-right: 0px;
+    }
 }

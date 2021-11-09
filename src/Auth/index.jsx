@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import cls from './Auth.module.css'
-import { FcGoogle } from 'react-icons/fc'
 import {authRequest} from '../helpers'
 import { useHistory } from 'react-router'
 import SignIn from '../components/SignIn'
@@ -126,10 +125,6 @@ const Auth = () => {
                     />
                     <button onClick={handleForm} type='submit'>CREATE</button>
                 </form>
-                <div className={cls.auth_alternate}>
-                    <h3>OR</h3>
-                    <FcGoogle/>
-                </div>
             </section>
         )
     )

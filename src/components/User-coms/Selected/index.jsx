@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
-import { deleteRequest, getRequest } from '../../api'
-import { arrayFunc } from '../../helpers'
-import Loader from '../UI/Loader'
+import { deleteRequest, getRequest } from '../../../api'
+import { arrayFunc } from '../../../helpers'
+import Loader from '../../UI/Loader'
 import cls from './Selected.module.css'
 import { RiCloseLine } from 'react-icons/ri'
-import { Link } from 'react-router-dom'
+import { FaRegNewspaper } from 'react-icons/fa'
 
 const Selected = () => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -37,7 +37,7 @@ const Selected = () => {
                 loading ? <Loader/> : (
                     base.length === 0 ? (
                         <div className={cls.seleted_empty}>
-                            <h1>You have no selected news</h1>
+                            <h1><FaRegNewspaper/> You have no selected news</h1>
                         </div>
                     ) : (
                         base.reverse().map(({id , content , picture}) => {
@@ -45,9 +45,9 @@ const Selected = () => {
                                 <div className={cls.selected_wrapper_image}>
                                     <img src={picture} alt="innerImage" />
                                 </div>
-                                <Link to={`news/${id}`} className={cls.selected_wrapper_content}>
+                                <div className={cls.selected_wrapper_content}>
                                     <p>{content}</p>
-                                </Link>
+                                </div>
                                 <div className={cls.selected_wrapper_footer}>
                                     <span onClick={() => handleDelete(id)}><RiCloseLine/></span>
                                 </div>  

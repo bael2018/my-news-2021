@@ -28,6 +28,7 @@
 
 .user_header_content{
     margin-left: 40px;
+    width: 60%;
 }
 
 .user_header_content h2{
@@ -65,6 +66,7 @@
     display: flex;
     border: 2px solid #eeeeee;
     background: rgb(245, 245, 245);
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
 }
@@ -116,4 +118,143 @@
     box-sizing: border-box;
     padding: 10px;
     background: white;
+}
+
+@media screen and (max-width: 1200px){
+    
+    .user_header_image{
+        width: 45%;
+    }
+    
+    .user_header_content{
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    
+    .user_header_image{
+        width: 50%;
+    }
+    
+    .user_header_content{
+        width: 47%;
+    }
+}
+
+@media screen and (max-width: 950px){
+    
+    .user_header_image{
+        width: 60%;
+    }
+    
+    .user_header_content{
+        width: 38%;
+    }
+}
+
+@media screen and (max-width: 850px){
+
+    .user_footer{
+        width: 100%;
+        text-align: center;
+    }
+
+    .user_wrapper{
+        flex-wrap: wrap;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .user_header{
+        height: 400px;
+        flex-wrap: wrap;
+    }
+    
+    .user_header_image{
+        width: 60%;
+        height: 60%;
+    }
+    
+    .user_header_content{
+        width: 100%;
+        text-align: center;
+        margin: 0px;
+    }
+
+    .user_header_content span{
+        justify-content: center;
+    }
+
+    .user_body{
+        margin-top: 60px;
+    }
+
+    .user_footer button{
+        padding: 8px 45px;
+    }
+
+    .user{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 750px){
+
+    .user_body{
+        flex-direction: column;
+    }
+
+    .user_body_sidebar{
+        width: 100%;
+    }
+    
+    .user_body_sidebar a{
+        border-bottom: 1px solid rgb(223, 223, 223);
+    }
+
+    .user_body_content{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px){
+
+    .user_header_image{
+        width: 80%;
+        height: 60%;
+    }
+    
+    .user_header_content h2{
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 550px){
+
+    .user_header_image{
+        width: 60%;
+    }
+
+    .user_wrapper{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 450px){
+
+    .user_header_image{
+        width: 70%;
+    }
+
+    .user_wrapper{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 400px){
+
+    .user_header_content h2{
+        font-size: 30px;
+    }
 }

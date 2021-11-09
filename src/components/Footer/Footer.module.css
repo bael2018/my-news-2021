@@ -46,4 +46,16 @@
 
 .footer_wrapper_content ul li a:hover{
     color: #01cbe6;
+    transform: translateY(-5px);
+}
+
+@media screen and (max-width: 450px){
+    
+    .footer_wrapper{
+        flex-direction: column;
+    }
+
+    .footer_wrapper_logo{
+        margin-bottom: 30px;
+    }
 }

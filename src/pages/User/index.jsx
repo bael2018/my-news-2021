@@ -6,9 +6,9 @@ import Loader from '../../components/UI/Loader'
 import { BiSelectMultiple } from 'react-icons/bi'
 import { BrowserRouter as Router, NavLink } from 'react-router-dom'
 import { FaEdit } from 'react-icons/fa'
-import Selected from '../../components/Selected'
+import Selected from '../../components/User-coms/Selected'
 import { Switch , Route, useHistory } from 'react-router'
-import Edit from '../../components/Edit'
+import Edit from '../../components/User-coms/Edit'
 
 const User = () => {
     const userID = JSON.parse(localStorage.getItem('user'))
@@ -37,7 +37,7 @@ const User = () => {
             <section className={cls.user}>
                 {
                     loading ? <Loader/> : (
-                        base.map(({image , email , name , years , hours , minutes , months , days}) => {
+                        base.map(({ image , email , name , years , hours , minutes , months , days }) => {
                             return <div key={email} className={cls.user_header}>
                             <div className={cls.user_wrapper}>
                                 <div 
@@ -46,9 +46,9 @@ const User = () => {
                                 </div>
                                 <div className={cls.user_header_content}>
                                     <h2>{name}</h2>
-                                    <span><CgCalendarDates/> {years}-{months >= 10 ? months + 1 : `0${months + 1}`}-
-                                    {days >= 10 ? days : `0${days}`} {hours >= 10 ? hours : `0${hours}`}
-                                    :{minutes >= 10 ? minutes : `0${minutes}`}</span>
+                                    <span><CgCalendarDates/> {years}-{months >= 9 ? months + 1 : `0${months + 1}`}-
+                                    {days >= 9 ? days : `0${days}`} {hours >= 9 ? hours : `0${hours}`}
+                                    :{minutes >= 9 ? minutes : `0${minutes}`}</span>
                                 </div>  
                             </div>
                             <div className={cls.user_footer}>

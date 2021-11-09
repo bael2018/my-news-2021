@@ -61,7 +61,7 @@ const Main = () => {
                                 recent.map(({title , id , picture}) => {
                                     return <div key={id} className={cls.main_wrapper_block_upper}>
                                     <div className={cls.main_wrapper_block_upper_picture}>
-                                        <img src={picture} alt="picture" alt='picture' />
+                                        <img src={picture} alt="inner" />
                                     </div>
                                     <Link to={`/news/${id}`}>{title}</Link>
                                 </div>
@@ -71,7 +71,7 @@ const Main = () => {
                                 recentArray.map(({title , id , picture}) => {
                                     return <div key={id} className={cls.main_wrapper_block_inner}>
                                     <div className={cls.main_wrapper_block_inner_image}>
-                                        <img src={picture} alt="picture" alt='picture' />
+                                        <img src={picture} alt="inner" />
                                     </div>  
                                     <div className={cls.main_wrapper_block_inner_content}>
                                         <Link to={`/news/${id}`} >{title}</Link>
@@ -86,7 +86,7 @@ const Main = () => {
                                 top.map(({title , id , picture}) => {
                                     return <div key={id} className={cls.main_wrapper_child_upper}>
                                     <div className={cls.main_wrapper_child_upper_picture}>
-                                        <img src={picture} alt="picture" alt='picture' />
+                                        <img src={picture} alt="inner" />
                                     </div>
                                     <Link to={`/news/${id}`} >{title}</Link>
                                 </div>
@@ -96,7 +96,7 @@ const Main = () => {
                                 topArray.map(({title , id , picture}) => {
                                     return <div key={id} className={cls.main_wrapper_child_body}>
                                     <div className={cls.main_wrapper_child_body_image}>
-                                        <img src={picture} alt="picture" alt='picture' />
+                                        <img src={picture} alt="inner" />
                                     </div>  
                                     <div className={cls.main_wrapper_child_body_content}>
                                         <Link to={`/news/${id}`} >{title}</Link>
@@ -105,13 +105,13 @@ const Main = () => {
                                 })
                             }
                         </div>
-                        <div className={cls.main_wrapper_child}>
+                        <div className={`${cls.main_wrapper_child} ${cls.main_wrapper_child_alt}`}>
                             <h4 style={{marginBottom: '10px'}} className={cls.main_wrapper_child_header}>Featured</h4>  
                             {
                                 featuredArray.map(({title , id , picture}) => {
                                     return <div key={id} className={cls.main_wrapper_child_body}>
                                     <div className={cls.main_wrapper_child_body_image}>
-                                        <img src={picture} alt="picture" alt='picture' />
+                                        <img src={picture} alt="inner"/>
                                     </div>  
                                     <div className={cls.main_wrapper_child_body_content}>
                                         <Link to={`/news/${id}`} >{title}</Link>

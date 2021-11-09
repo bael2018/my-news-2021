@@ -16,22 +16,38 @@ const Footer = () => {
                     <h3>Our Socials</h3>
                     <ul>
                         <li>
-                            <a href="/">
+                            <a
+                                rel="noreferrer"
+                                href="https://www.facebook.com/"
+                                target='_blank'
+                            >
                                 <AiFillFacebook/>
                             </a>
                         </li>
                         <li>
-                            <a href="/">
+                            <a 
+                                rel="noreferrer"
+                                href="https://www.instagram.com/"
+                                target='_blank'
+                            >
                                 <TiSocialInstagram/>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a 
+                                rel="noreferrer"
+                                href="https://twitter.com/"
+                                target='_blank'
+                            >
                                 <FaTwitterSquare/>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a 
+                                rel="noreferrer"
+                                href="https://www.youtube.com/"
+                                target='_blank'
+                            >
                                 <IoLogoYoutube/>
                             </a>
                         </li>

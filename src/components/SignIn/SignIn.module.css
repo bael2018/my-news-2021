@@ -1,8 +1,7 @@
 
 .auth{
     width: 40%;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 100px auto;
 }
 
 .auth form input{
@@ -44,19 +43,6 @@
     margin-bottom: 20px;
 }
 
-.auth_alternate{
-    text-align: center;
-}
-
-.auth_alternate h3{
-    color: #01cbe6;
-}
-
-.auth_alternate svg{
-    cursor: pointer;
-    font-size: 35px;
-}
-
 .auth p{
     font-weight: 600;
     text-align: center;
@@ -71,4 +57,64 @@
 
 .auth p span:hover{
     text-decoration: underline;
+}
+
+@media screen and (max-width: 1150px){
+    
+    .auth{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 900px){
+    
+    .auth{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 750px){
+    
+    .auth{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    
+    .auth{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    
+    .auth{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    
+    .auth h1{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 420px){
+    
+    .auth h1{
+        font-size: 26px;
+    }
+
+    .auth p{
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    
+    .auth h1{
+        font-size: 25px;
+    }
 }

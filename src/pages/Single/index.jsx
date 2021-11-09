@@ -11,15 +11,16 @@ import { MdClose } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
 const Single = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
+    const userInfo = JSON.parse(localStorage.getItem('user'))
     const [commentBase , setCommentBase] = useState([])
     const [loading , setLoading] = useState(false)
     const [newShow , setNewShow] = useState(false)
     const [react , setReact] = useState(false)
     const [comment , setComment] = useState('')
-    const [Uimage , setUimage] = useState('')
     const [base , setBase] = useState([])
     const [select , setSelect] = useState([])
+    const [isLiked , setIsLiked] = useState(true)
+    const [like , setLike] = useState(0)
     const { newID } = useParams()
 
     useEffect(() => {
@@ -27,20 +28,10 @@ const Single = () => {
         .then(res => res.json() , setLoading(true))
         .then(r => {
             setLoading(false)
+            setLike(r.likes)
             setBase([r])
         })
     } , [newID , newShow])
-
-    useEffect(() => {
-        getRequest('users/' , `${user}.json` , '')
-        .then(res => res.json())
-        .then(r => {
-            if(r){
-                const userImage = r.image
-                setUimage(userImage)
-            }
-        })
-    } , [])
 
     const handleComment = () => {
         const data = new Date()
@@ -50,31 +41,28 @@ const Single = () => {
         const minutes = data.getMinutes()
         const days = data.getDate()
 
-        if(comment.length > 10){
-            getRequest('users/' , `${user}.json` , '')
-            .then(res => res.json())
-            .then(r => {
-                const name = r.name
-                const image = r.image
+        getRequest('users/' , `${userInfo}.json` , '')
+        .then(res => res.json())
+        .then(r => {
+            const name = r.name
+            const image = r.image
 
-                postRequest({
-                    text: comment,
-                    year,
-                    month,
-                    hours,
-                    minutes,
-                    days,
-                    user: name,
-                    picture: image
-                }
-                , 'news/' , `${newID}/`, 'comments.json'
-                )
-                setComment('')
-                setReact(!react)
-            })
-        }else{
-            alert('Warner')
-        }
+            postRequest({
+                text: comment,
+                year,
+                month,
+                hours,
+                minutes,
+                days,
+                user: name,
+                picture: image,
+                del: userInfo
+            }
+            , 'news/' , `${newID}/`, 'comments.json'
+            )
+            setComment('')
+            setReact(!react)
+        })
     }
 
     useEffect(() => {
@@ -98,13 +86,26 @@ const Single = () => {
     }
 
     const handleNew = id => {
-        changeRequest(
-        {
-            // likes: likes
-        },
-        'news/',
-        `${id}.json`,
-        '',
+        isLiked ? (
+            changeRequest(
+            {
+                likes: like + 1
+            },
+            'news/',
+            `${id}.json`,
+            '',
+            )
+            .then(() => setNewShow(!newShow) , setIsLiked(false))
+        ) : (
+            changeRequest(
+            {
+                likes: like - 1
+            },
+            'news/',
+            `${id}.json`,
+            '',
+            )
+            .then(() => setNewShow(!newShow) , setIsLiked(true))
         )
     }
 
@@ -114,12 +115,12 @@ const Single = () => {
             id: id
         }
 
-        postRequest(data , 'users/' , `${user}/` , 'selected.json')
+        postRequest(data , 'users/' , `${userInfo}/` , 'selected.json')
         .then(() => setNewShow(!newShow))
     }
 
     useEffect(() => {
-        getRequest('users/' , `${user}/` , 'selected.json')
+        getRequest('users/' , `${userInfo}/` , 'selected.json')
         .then(res => res.json())
         .then(r => {
             if(r){
@@ -140,9 +141,9 @@ const Single = () => {
                                 <h1>{item.title}</h1>
                                 <span>
                                     <CgCalendarDates/> 
-                                    {item.year}-{item.month >= 10 ? item.month + 1 : `0${item.month + 1}`}
-                                    -{item.days >= 10 ? item.days : `0${item.days}`} {item.hours >= 10 ? item.hours : `0${item.hours}`}:
-                                    {item.minutes >= 10 ? item.minutes : `0${item.minutes}`}
+                                    {item.year}-{item.month >= 9 ? item.month + 1 : `0${item.month + 1}`}
+                                    -{item.days >= 9 ? item.days : `0${item.days}`} {item.hours >= 9 ? item.hours : `0${item.hours}`}:
+                                    {item.minutes >= 9 ? item.minutes : `0${item.minutes}`}
                                 </span>
                             </div>
                             <div className={cls.new_child_body}>
@@ -169,13 +170,18 @@ const Single = () => {
                                 }
                             </div>
                             <div className={cls.new_child_footer}>
-                                <span onClick={() => handleNew(newID)}>
-                                    <AiFillHeart/>
-                                    {item.likes}
-                                </span> 
-
                                 {
-                                    user ? (
+                                    userInfo ? (
+                                        <span onClick={() => handleNew(newID)}>
+                                            <AiFillHeart/>
+                                            {item.likes}
+                                        </span> 
+                                    ) : (
+                                        null
+                                    )
+                                }
+                                {
+                                    userInfo ? (
                                         <button className={
                                             select.map(({id}) => {
                                                 return `
@@ -192,7 +198,7 @@ const Single = () => {
                             </div>
                             <div className={cls.new_child_comment}>
                                 {
-                                    user ? (
+                                    userInfo ? (
                                         <>
                                             <div className={cls.new_child_comment_typer}>
                                                 <input 
@@ -212,10 +218,10 @@ const Single = () => {
                                                     ) : (
                                                         commentBase.map(({
                                                             id , picture , text , days , hours , 
-                                                            minutes , month , user , year 
+                                                            minutes , month , user , year , del
                                                         }) => {
                                                             return <div key={id} className={
-                                                                    Uimage === picture ? 
+                                                                    del === userInfo ? 
                                                                     `   ${cls.new_child_comment_content_wrapper} 
                                                                         ${cls.new_child_comment_content_wrapper_alt}
                                                                     ` :
@@ -232,9 +238,9 @@ const Single = () => {
                     
                                                             <div className={cls.new_child_comment_content_wrapper_footer}>
                                                                 <CgCalendarDates/>  
-                                                                {year}-{month >= 10 ? month + 1 : `0${month + 1}`}
-                                                                -{days >= 10 ? days : `0${days}`} {hours >= 10 ? hours : `0${hours}`}:
-                                                                {minutes >= 10 ? minutes : `0${minutes}`}
+                                                                {year}-{month >= 10 ? month + 1 : `${month + 1}`}
+                                                                -{days >= 10 ? days : `${days}`} {hours >= 10 ? hours : `${hours}`}:
+                                                                {minutes >= 10 ? minutes : `${minutes}`}
                                                             </div>
                                                             
                                                             <div className={cls.new_child_comment_content_wrapper_options}>
@@ -249,7 +255,7 @@ const Single = () => {
                                     ) : (
                                         <div className={cls.comment_warner}>
                                             <h1>
-                                                <Link to='/auth'>Log in</Link> to be able leave comments 
+                                                <Link to='/auth'>Log in</Link> to be able to leave comments 
                                                 <AiOutlineComment/>
                                             </h1>
                                         </div>

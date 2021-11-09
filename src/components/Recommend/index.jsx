@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Loader from '../UI/Loader'
 import { getRequest } from '../../api'
 import { arrayFunc } from '../../helpers'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Recommend = () => {
     const [base , setBase] = useState([])

@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .new_child{
@@ -56,6 +57,7 @@
 
 .new_child_body_content h3{
     font-size: 20px;
+    line-height: 1.5;
 }
 
 .new_child_body_content p{
@@ -67,7 +69,6 @@
     display: flex;
     justify-content: space-between;
     margin: 30px 0;
-    margin-bottom: 40px;
 }
 
 .new_child_footer button{
@@ -110,6 +111,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     border: 2px solid rgb(197, 197, 197);
     overflow: hidden;
     height: 50px;
@@ -266,4 +268,74 @@
     width: 100%;
     height: 350px;
     margin: 30px 0;
+}
+
+@media screen and (max-width: 1000px){
+    
+    .new_child{
+        width: 100%;
+    }
+
+    .new{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 650px){
+
+    .new_child_body img{
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    
+    .comment_warner h1{
+        flex-direction: column;
+        line-height: 1.6;
+    }
+}
+
+@media screen and (max-width: 500px){
+
+    .new_child_comment_typer input{
+        width: 80%;
+    }
+
+    .new_child_comment_typer button{
+        width: 20%;
+    }
+
+    .comment_warner h1{
+        font-size: 22px;
+    }
+
+    .new_child_header h1{
+        font-size: 30px;
+    }
+
+    .new_child_body_content h3{
+        font-size: 19px;
+    }
+
+    .comment_empty h1{
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 450px){
+
+    .new_child_comment_content_wrapper{
+        max-width: 100% !important;
+    }
+
+    .new_child_comment_content_wrapper_options{
+        right: 0;
+        top: 0%;
+    }
+
+    .new_child_comment_content_wrapper_options span{
+        color: #01cbe6;
+        font-size: 35px;
+    }
 }
