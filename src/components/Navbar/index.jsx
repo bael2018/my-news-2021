@@ -48,9 +48,11 @@ const Navbar = () => {
         <>
             <div 
                 className={bar ? cls.leftBar_cover : `${cls.leftBar_cover} ${cls.leftBar_cover_active}`}
-                onClick={() => setBar(false)}
             ></div>
-            <div className={bar ? cls.leftBar : `${cls.leftBar} ${cls.leftBar_active}`}>
+            <div 
+                className={bar ? cls.leftBar : `${cls.leftBar} ${cls.leftBar_active}`}
+                onClick={() => setBar(false)}
+            >
                 <div className={cls.leftBar_inside}>
                     <span className={cls.leftBar_icon} onClick={() => setBar(prev => !prev)}>
                         <GrClose/>
